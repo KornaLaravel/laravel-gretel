@@ -8,6 +8,7 @@ use Glhd\Gretel\Tests\Models\User;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\PendingResourceRegistration;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class ResourceRoutesTest extends TestCase
 {
@@ -22,7 +23,7 @@ class ResourceRoutesTest extends TestCase
 		$this->user = User::factory()->create(['name' => 'Chris Morrell']);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_array_syntax(bool $cache): void
 	{
 		$this->registerResourceRoute($cache, function(PendingResourceRegistration $resource) {
@@ -59,7 +60,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_callback_syntax(bool $cache): void
 	{
 		$this->registerResourceRoute($cache, function(PendingResourceRegistration $resource) {
@@ -95,7 +96,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_group_prefix(bool $cache): void
 	{
 		Route::name('foo.')->group(function() use ($cache) {
@@ -133,7 +134,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_custom_names(bool $cache): void
 	{
 		$this->registerResourceRoute($cache, function(PendingResourceRegistration $resource) {
@@ -176,7 +177,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_hyphenated_names(bool $cache): void
 	{
 		Route::middleware(SubstituteBindings::class)
@@ -216,7 +217,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_custom_parents(bool $cache): void
 	{
 		$this->registerResourceRoute($cache, function(PendingResourceRegistration $resource) {
@@ -253,7 +254,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_custom_index_parent(bool $cache): void
 	{
 		$this->registerResourceRoute($cache, function(PendingResourceRegistration $resource) {
@@ -294,7 +295,7 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_custom_parameter_name(bool $cache): void
 	{
 		Route::middleware(SubstituteBindings::class)
@@ -335,10 +336,8 @@ class ResourceRoutesTest extends TestCase
 		);
 	}
 
-	/**
-	 * @see https://github.com/glhd/gretel/issues/7
-	 * @dataProvider cachingProvider
-	 */
+	/** @see https://github.com/glhd/gretel/issues/7 */
+	#[DataProvider('cachingProvider')]
 	public function test_grouped_resource_routes(bool $cache): void
 	{
 		Route::middleware(SubstituteBindings::class)

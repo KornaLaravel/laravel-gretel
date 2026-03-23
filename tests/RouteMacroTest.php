@@ -6,6 +6,7 @@ use Glhd\Gretel\Tests\Models\Note;
 use Glhd\Gretel\Tests\Models\User;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class RouteMacroTest extends TestCase
 {
@@ -27,7 +28,7 @@ class RouteMacroTest extends TestCase
 		$this->withoutExceptionHandling();
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_macro_registers_new_breadcrumb(bool $cache): void
 	{
 		Route::get('/users', $this->action())
@@ -41,7 +42,7 @@ class RouteMacroTest extends TestCase
 		$this->assertActiveBreadcrumbs(['Users', '/users']);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_full_parent_name_is_registered_directly(bool $cache): void
 	{
 		Route::get('/users', $this->action())
@@ -59,7 +60,7 @@ class RouteMacroTest extends TestCase
 		$this->assertActiveBreadcrumbs(['Users', '/users'], ['Add a User', '/users/create']);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_parent_shorthand_syntax(bool $cache): void
 	{
 		Route::get('/users', $this->action())
@@ -77,7 +78,7 @@ class RouteMacroTest extends TestCase
 		$this->assertActiveBreadcrumbs(['Users', '/users'], ['Add a User', '/users/create']);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_dynamic_title_via_closure(bool $cache): void
 	{
 		Route::get('/users/{user}', fn(User $user) => 'OK')
@@ -92,7 +93,7 @@ class RouteMacroTest extends TestCase
 		$this->assertActiveBreadcrumbs([$this->user->name, route('users.show', $this->user)]);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_nested_routes(bool $cache): void
 	{
 		Route::get('/users/{user}', fn(User $user) => 'OK')
@@ -115,7 +116,7 @@ class RouteMacroTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_shallow_nested_routes_via_callback(bool $cache = true): void
 	{
 		Route::get('/users', fn(User $user) => 'OK')
@@ -157,7 +158,7 @@ class RouteMacroTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_dynamic_parent(bool $cache): void
 	{
 		Route::get('/users/{user}', fn(User $user) => 'OK')
@@ -199,7 +200,7 @@ class RouteMacroTest extends TestCase
 		);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_breadcrumbs_can_be_registered_out_of_order(bool $cache): void
 	{
 		Route::get('/users/create', $this->action())
@@ -217,7 +218,7 @@ class RouteMacroTest extends TestCase
 		$this->assertActiveBreadcrumbs(['Users', '/users'], ['Add a User', '/users/create']);
 	}
 	
-	/** @dataProvider cachingProvider */
+	#[DataProvider('cachingProvider')]
 	public function test_defining_parent_with_route_helper(bool $cache): void
 	{
 		Route::get('/users/{user}', fn(User $user) => 'OK')
