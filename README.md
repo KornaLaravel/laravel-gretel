@@ -7,12 +7,6 @@
 			alt="Build Status" 
 		/>
 	</a>
-	<a href="https://codeclimate.com/github/glhd/gretel/test_coverage" target="_blank">
-		<img 
-			src="https://api.codeclimate.com/v1/badges/f597a6e8d9f968a55f03/test_coverage" 
-			alt="Coverage Status" 
-		/>
-	</a>
 	<a href="https://packagist.org/packages/glhd/gretel" target="_blank">
         <img 
             src="https://poser.pugx.org/glhd/gretel/v/stable" 
@@ -25,10 +19,10 @@
             alt="MIT Licensed" 
         />
     </a>
-    <a href="https://twitter.com/inxilpro" target="_blank">
+    <a href="https://bsky.app/profile/cmorrell.com" target="_blank">
         <img 
-            src="https://img.shields.io/twitter/follow/inxilpro?style=social" 
-            alt="Follow @inxilpro on Twitter" 
+            src="https://img.shields.io/bluesky/followers/cmorrell.com" 
+            alt="Follow @cmorrell.com on bsky" 
         />
     </a>
 </div>
